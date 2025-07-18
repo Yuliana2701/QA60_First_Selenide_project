@@ -10,3 +10,15 @@ Feature: Login
     And user clicks on User icon
     Then user verifies his name
 
+
+  @wrongPassword
+
+  Scenario: Login with valid email and wrong password
+
+    Given user is on the Home page
+    When user clicks Login icon
+    And user enters valid email and wrong password
+    And user clicks on Anmelden button
+    Then user verifies error message is displayed
+
+

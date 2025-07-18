@@ -3,6 +3,7 @@ package com.sconto.stepDefinitions;
 import com.codeborne.selenide.Selenide;
 import com.sconto.pages.HomePage;
 import com.sconto.pages.LoginPage;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 
@@ -29,5 +30,15 @@ public class LoginPageSteps {
     @Then("user verifies his name")
     public void verify_his_name(){
         login.verifyName();
+    }
+    @And("user enters valid email and wrong password")
+    public void enter_valid_email_and_wrong_password(){
+        login= Selenide.page(LoginPage.class);
+        login.enterWrongData();
+    }
+    @Then("user verifies error message is displayed")
+    public void verify_error_message_is_displayed(){
+        login.errorTextMessage();
+
     }
 }

@@ -13,7 +13,9 @@ import static com.codeborne.selenide.Selenide.$;
 public class LoginPage {
     public static final String validEmail = PropertiesLoader.loadProperty("valid.email");
     public static final String validPassword = PropertiesLoader.loadProperty("valid.password");
+    public static final String invalidPassword = PropertiesLoader.loadProperty("invalid.password");
     public static final String userName = PropertiesLoader.loadProperty("user.name");
+    public static final String errorMessage = PropertiesLoader.loadProperty("error.message");
 
     @FindBy(css = ".existingAccount__headline")
     WebElement liginTitle;
@@ -40,5 +42,19 @@ public class LoginPage {
     public SelenideElement verifyName() {
 
         return $(userNameTitle).shouldHave(text(userName));
+    }
+    @FindBy(id = "loginEmail")
+    WebElement emailValid;
+    @FindBy(id = "loginPassword")
+    WebElement passwordWrong;
+    public LoginPage enterWrongData() {
+        $(emailValid).val(validEmail);
+        $(passwordWrong).val(invalidPassword);
+        return Selenide.page(this);
+    }
+@FindBy(id = "loginEmail-error")
+WebElement loginEmailError;
+    public SelenideElement errorTextMessage() {
+        return $(loginEmailError).shouldHave(text(errorMessage));
     }
 }
